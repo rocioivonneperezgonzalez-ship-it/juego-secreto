@@ -1,7 +1,10 @@
+// 1) Declara primero las variables que usa la función
+let listaNumerosSorteados = [];
+let numeroMaximo = 10;
+
+// 2) Ahora sí, genera el número secreto
 let númeroSecreto = generarNúmeroSecreto();
 let intentos = 1; 
-let listaNumerosSorteados = []; 
-let numeroMaximo = 10; 
 
 function asignarTextoElemento(elemento, texto) {
     let elementoHTLM = document.querySelector('h1'); 
@@ -46,4 +49,5 @@ function generarNúmeroSecreto() {
 }
 asignarTextoElemento('h1', 'Juego del número secreto!');
 asignarTextoElemento('p', `Indica un número del 1 al ${numeroMaximo} `);
+
 
