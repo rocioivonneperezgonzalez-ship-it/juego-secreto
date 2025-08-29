@@ -28,26 +28,47 @@ function verificarIntento() {
     return; 
 }
 function limpiarCaja() {
-    document.querySelector('#valorUsuario').value='';
-
+ document.querySelector('#valorUsuario').value = '';
+  
 }
+
 function generarNúmeroSecreto() {
-    let numeroGenerado = Math.floor(Math.random()*numeroMaximo)+1; 
-    // si ya sorteamos todos los numeros 
-    if (listaNumerosSorteados.length==numeroMaximo){
-        asignarTextoElemento ('p', 'Ya se sortearon los números posibles')
-    }else { 
-        //si el numero generado esta incluudo en la lista 
-        if (listaNumerosSorteados.includes(numeroGenerado)) {
-        return generarNúmeroSecreto();
-        } else {
-        listaNumerosSorteados.push(numeroGenerado);
-        return numeroGenerado;
-        }
+  const numeroGenerado = Math.floor(Math.random() * numeroMaximo) + 1;
+
+  // Si ya sorteamos todos los números
+  if (listaNumerosSorteados.length === numeroMaximo) {
+    asignarTextoElemento('.texto__parrafo', 'Ya se sortearon los números posibles');
+    return null;
+  } else {
+    // Si el número generado ya está en la lista, generar otro
+    if (listaNumerosSorteados.includes(numeroGenerado)) {
+      return generarNúmeroSecreto();
+    } else {
+      listaNumerosSorteados.push(numeroGenerado);
+      return numeroGenerado;
     }
+  }
+}
+function condicionesIniciales(){
+    asignarTextoElemento('h1', 'Juego del número secreto!');
+    asignarTextoElemento('.texto__parrafo', `Indica un número del 1 al ${numeroMaximo}`);
+    númeroSecreto = generarNúmeroSecreto(); 
+    intentos = 1; 
+    document.getElementById('reiniciar').addEventListener('click', reiniciarJuego);
 
 }
-asignarTextoElemento('h1', 'Juego del número secreto!');
-asignarTextoElemento('p', `Indica un número del 1 al ${numeroMaximo} `);
+
+function reiniciarJuego(){
+    //limpiar caja
+    limpiarCaja(); 
+    // Inicializar el numero de intentos 
+    condicionesIniciales();
+    // Desabilitar el boton de nuevo juego
+    document.querySelector('#reiniciar').setAttribute('disabled','true');
+
+}
+
+condicionesIniciales();
+
 
 
